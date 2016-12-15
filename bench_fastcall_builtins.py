@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Benchmark on Python builtin functions to measure the speedup of
 _PyObject_FastCall():
