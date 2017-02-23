@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 Benchmark on Python builtin functions to measure the speedup of
-_PyObject_FastCall():
+_PyObject_FastCall().
+
 http://bugs.python.org/issue26814
 
 Created at 2016-04-22 by Victor Stinner.

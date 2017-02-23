@@ -6,4 +6,12 @@ The code is distributed under the MIT license: see the COPYING file.
 
 Benchmarks were written in 2016, and so mostly for CPython 3.6.
 
+The `Python perf module <http://perf.readthedocs.io//>`_ is needed by
+benchmarks. Install perf using::
+
+    python3 -m pip install -U perf
+
+Read perf documentation to see how to run stable benchmarks (ex: tune your
+system for benchmarking).
+
 -- Victor Stinner
