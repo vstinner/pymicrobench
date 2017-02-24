@@ -7,7 +7,7 @@ Pass keyword arguments to the tp_init slot of a Python constructor. Result for
 
 http://bugs.python.org/issue28839
 
-Created at 2016-04-22 by Victor Stinner.
+Created at 2016-12-01 by Victor Stinner.
 """
 
 import perf
