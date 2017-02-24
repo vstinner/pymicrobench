@@ -10,12 +10,14 @@ Created at 2016-12-09 by Victor Stinner.
 
 import perf
 
+
 class Obj:
     def __int__(self):
         return 5
 
     def __getitem__(self, key):
         return 6
+
 
 obj = Obj()
 if int(obj) != 5:
@@ -25,11 +27,11 @@ if obj[0] != 6:
 
 runner = perf.Runner()
 
-runner.bench_func('Python __int__: int(obj)',
-                  'int(obj)',
-                  duplicate=100,
-                  # Copy int type builtin into globals for faster lookup
-                  globals={'int': int, 'obj': obj})
+runner.timeit('Python __int__: int(obj)',
+              'int(obj)',
+              duplicate=100,
+              # Copy int type builtin into globals for faster lookup
+              globals={'int': int, 'obj': obj})
 
 runner.timeit('Python __getitem__: obj[0]',
               'obj[0]',
