@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Benchmark on calling C methods for FASTCALL.
 
