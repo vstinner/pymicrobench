@@ -19,4 +19,4 @@ runner.timeit('b"".join((b"hello", b"world"))',
 runner.timeit('b"".join((b"hello", b"world") * 100)',
               'sep.join(seq)',
               setup="sep=b''; seq=(b'hello', b'world', b'. ') * 100",
-              duplicate=100)
+              duplicate=10)
