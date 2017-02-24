@@ -12,19 +12,19 @@ import perf
 
 bench = perf.Runner()
 
-bench.timeit("filter",
+bench.timeit("filter(lambda x: x, list(range(1000)))",
              "list(filter(f, s))",
              "f = lambda x: x; s = list(range(1000))")
 
-bench.timeit("map",
+bench.timeit("map(lambda x: x, list(range(1000)))",
              "list(map(f, s))",
              "f = lambda x: x; s = list(range(1000))")
 
-bench.timeit("sorted(list, key=lambda x: x)",
+bench.timeit("sorted(list(range(1000)), key=lambda x: x)",
              "sorted(s, key=f)",
              "f = lambda x: x; s = list(range(1000))")
 
-bench.timeit("sorted(list)",
+bench.timeit("sorted(list(range(1000)))",
              "sorted(s)",
              "s = list(range(1000))")
 
@@ -56,10 +56,11 @@ bench.timeit('unbound_pymethod(obj, 1, 2)',
              'm(a, 1, 2)',
              'class A:\n def meth(self, arg1, arg2): pass\na=A(); m=A.meth')
 
-bench.timeit('func()',
-             'func()',
-             'def func(): pass')
-
-bench.timeit('func(1, 2, 3)',
-             'func(1, 2, 3)',
-             'def func(a, b, c): pass')
+# unrelated, should be moved to a different file
+# bench.timeit('func()',
+#              'func()',
+#              'def func(): pass')
+#
+# bench.timeit('func(1, 2, 3)',
+#              'func(1, 2, 3)',
+#              'def func(a, b, c): pass')
