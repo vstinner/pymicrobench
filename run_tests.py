@@ -57,10 +57,13 @@ def run_script(script, output):
 
 
 def run_tests():
+    scripts = glob.glob("bench*.py")
     with temporary_file() as tmpfile:
-        for script in glob.glob("bench*.py"):
+        for script in scripts:
             check_permission(script)
             check_shebang(script)
+
+        for script in scripts:
             run_script(script, tmpfile)
 
 
