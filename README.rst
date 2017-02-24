@@ -1,3 +1,7 @@
+.. image:: https://travis-ci.org/haypo/pymicrobench.svg?branch=master
+   :alt: Build status of pymicrobench on Travis CI
+   :target: https://travis-ci.org/haypo/pymicrobench
+
 My collection of Python microbenchmarks written for CPython.
 
 Benchmarks were written to make sure that a change makes CPython faster.
