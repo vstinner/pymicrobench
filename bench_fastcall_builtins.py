@@ -27,15 +27,18 @@ bench.timeit("sorted(list(range(1000)), key=lambda x: x)",
 bench.timeit("namedtuple.attr",
              "a.a",
              "from collections import namedtuple as n; a = n('n', 'a b c')(1, 2, 3)",
-             duplicate=20)
+             duplicate=100)
 
 bench.timeit('object.__setattr__(obj, "x", 1)',
              'set(obj, "x", 1)',
-             'class SimpleNamespace(object): pass\nset=object.__setattr__; obj=SimpleNamespace()')
+             'class SimpleNamespace(object): pass\nset=object.__setattr__; obj=SimpleNamespace()',
+             duplicate=100)
 
 bench.timeit('object.__getattribute__(obj, "x")',
              'get(obj, "x")',
-             'class SimpleNamespace(object): pass\nget=object.__getattribute__; obj=SimpleNamespace(); obj.x=1')
+             'class SimpleNamespace(object): pass\nget=object.__getattribute__; obj=SimpleNamespace(); obj.x=1',
+             duplicate=100)
 
 bench.timeit('getattr(1, "real")',
-             'getattr(1, "real")')
+             'getattr(1, "real")',
+             duplicate=100)
