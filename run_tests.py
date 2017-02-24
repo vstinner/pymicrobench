@@ -25,9 +25,11 @@ def test(script, output):
     # names are unique
     args = [sys.executable, script, "-p1", "-v", "--append", output]
     print("+ " + ' '.join(args))
-    proc = subprocess.run(args)
-    if proc.returncode:
-        sys.exit(proc.returncode)
+    proc = subprocess.Popen(args)
+    with proc:
+        exitcode = proc.wait()
+    if exitcode:
+        sys.exit(exitcode)
 
 
 def run_tests():
