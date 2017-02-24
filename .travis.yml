@@ -1,6 +1,6 @@
 language: python
 env:
-  - TOXENV=py35
+  - TOXENV=py3
   - TOXENV=pep8
 # upgrade setuptools to support environment markers
 # in install_requires of setup.py
