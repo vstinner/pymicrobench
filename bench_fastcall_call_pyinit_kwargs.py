@@ -12,17 +12,21 @@ Created at 2016-12-01 by Victor Stinner.
 
 import perf
 
+
 class Bench1:
     def __init__(self, a):
         pass
+
 
 class Bench5:
     def __init__(self, a, b, c, d, e):
         pass
 
+
 class Bench10:
     def __init__(self, a, b, c, d, e, f, g, h, i, j):
         pass
+
 
 def bench1(loops):
     Bench = Bench1   # use a local variable to avoid LOAD_GLOBAL
@@ -48,6 +52,7 @@ def bench1(loops):
     dt = perf.perf_counter() - t0
     return dt
 
+
 def bench5(loops):
     Bench = Bench5   # use a local variable to avoid LOAD_GLOBAL
     it = range(loops)
@@ -72,6 +77,7 @@ def bench5(loops):
     dt = perf.perf_counter() - t0
     return dt
 
+
 def bench10(loops):
     Bench = Bench10   # use a local variable to avoid LOAD_GLOBAL
     it = range(loops)
@@ -95,6 +101,7 @@ def bench10(loops):
 
     dt = perf.perf_counter() - t0
     return dt
+
 
 runner = perf.Runner()
 runner.bench_sample_func('call_pyinit_kw1', bench1, inner_loops=10)
