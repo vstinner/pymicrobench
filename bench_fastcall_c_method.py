@@ -1,5 +1,5 @@
 """
-Benchmark on calling C methods.
+Benchmark on calling C methods for FASTCALL.
 
 http://bugs.python.org/issue29263
 
