@@ -104,6 +104,6 @@ def bench10(loops):
 
 
 runner = perf.Runner()
-runner.bench_sample_func('call_pyinit_kw1', bench1, inner_loops=10)
-runner.bench_sample_func('call_pyinit_kw5', bench5, inner_loops=10)
-runner.bench_sample_func('call_pyinit_kw10', bench10, inner_loops=10)
+runner.bench_time_func('call_pyinit_kw1', bench1, inner_loops=10)
+runner.bench_time_func('call_pyinit_kw5', bench5, inner_loops=10)
+runner.bench_time_func('call_pyinit_kw10', bench10, inner_loops=10)
