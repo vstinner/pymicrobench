@@ -1,6 +1,6 @@
-++++++++++++
+************
 pymicrobench
-++++++++++++
+************
 
 .. image:: https://travis-ci.org/haypo/pymicrobench.svg?branch=master
    :alt: Build status of pymicrobench on Travis CI
@@ -21,5 +21,3 @@ benchmarks. Install perf using::
 
 Read perf documentation to see how to run stable benchmarks (ex: tune your
 system for benchmarking).
-
--- Victor Stinner
