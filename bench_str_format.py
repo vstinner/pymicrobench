@@ -35,78 +35,81 @@ import perf
 import sys
 
 
-def run_benchmark(bench):
-    def timeit(stmt, setup):
-        name = "%s; %s" % (setup, stmt)
-        bench.timeit(name, stmt, setup)
+use_unicode = (sys.version_info >= (3,))
+if use_unicode:
+    BMP_LIT = '\\u20ac'
+    BMP = '"\\u20ac"'
+SHORT_ASCII = '"abc"'
+SHORT_INT = '123'
+SHORT_INT_NEG = '-123'
+SHORT_FLOAT = '12.345'
+SHORT_COMPLEX1 = '2j'
+SHORT_COMPLEX2 = '1+2j'
+if use_unicode:
+    SHORT_BMP = BMP + ' * 3'
+    SHORT_ARGS = (SHORT_ASCII, SHORT_BMP, SHORT_INT)
+else:
+    SHORT_ARGS = (SHORT_ASCII, SHORT_INT)
+SHORT_ARGS += (SHORT_FLOAT, SHORT_COMPLEX1, SHORT_COMPLEX2)
 
-    use_unicode = (sys.version_info >= (3,))
-    if use_unicode:
-        bmp_lit = '\\u20ac'
-        bmp = '"\\u20ac"'
-    short_ascii = '"abc"'
-    short_int = '123'
-    short_int_neg = '-123'
-    short_float = '12.345'
-    short_complex1 = '2j'
-    short_complex2 = '1+2j'
-    if use_unicode:
-        short_bmp = bmp + ' * 3'
-        SHORT_ARGS = (short_ascii, short_bmp, short_int)
-    else:
-        SHORT_ARGS = (short_ascii, short_int)
-    SHORT_ARGS += (short_float, short_complex1, short_complex2)
+LONG_ASCII = '"A" * 4096'
+LONG_INT = "2**4096 - 1"
+if use_unicode:
+    LONG_BMP = BMP + ' * 4096'
+    LONG_ARGS = (LONG_ASCII, LONG_BMP, LONG_INT)
+else:
+    LONG_ARGS = (LONG_ASCII, LONG_INT)
 
-    long_ascii = '"A" * 4096'
-    long_int = "2**4096 - 1"
-    if use_unicode:
-        long_bmp = bmp + ' * 4096'
-        LONG_ARGS = (long_ascii, long_bmp, long_int)
-    else:
-        LONG_ARGS = (long_ascii, long_int)
+HUGE_ASCII = '"A" * (10 * 1024 * 1024)'
+HUGE_INT = "2 ** 123456 - 1"
+if use_unicode:
+    HUGE_BMP = BMP + ' * (10 * 1024 * 1024)'
+    HUGE_ARGS = (HUGE_ASCII, HUGE_BMP, HUGE_INT)
+else:
+    HUGE_ARGS = (HUGE_ASCII, HUGE_INT)
 
-    huge_ascii = '"A" * (10 * 1024 * 1024)'
-    huge_int = "2 ** 123456 - 1"
-    if use_unicode:
-        huge_bmp = bmp + ' * (10 * 1024 * 1024)'
-        HUGE_ARGS = (huge_ascii, huge_bmp, huge_int)
-    else:
-        HUGE_ARGS = (huge_ascii, huge_int)
+INT_ARGS = (SHORT_INT, SHORT_INT_NEG, LONG_INT, HUGE_INT)
 
-    INT_ARGS = (short_int, short_int_neg, long_int, huge_int)
 
-    # Basic format, short ASCII output
+def basic_format_short_ascii_output():
     for arg in SHORT_ARGS:
         timeit(setup='fmt="{}"; arg=%s' % arg, stmt='fmt.format(arg)')
-    timeit(setup='fmt="{:d}"; arg=%s' % short_int, stmt='fmt.format(arg)')
-    timeit(setup='fmt="{:x}"; arg=%s' % short_int, stmt='fmt.format(arg)')
+    timeit(setup='fmt="{:d}"; arg=%s' % SHORT_INT, stmt='fmt.format(arg)')
+    timeit(setup='fmt="{:x}"; arg=%s' % SHORT_INT, stmt='fmt.format(arg)')
     for arg in SHORT_ARGS:
         timeit(setup='fmt="%%s"; arg=%s' % arg, stmt='fmt % arg')
-    timeit(setup='fmt="%%d"; arg=%s' % short_int, stmt='fmt % arg')
-    timeit(setup='fmt="%%x"; arg=%s' % short_int, stmt='fmt % arg')
+    timeit(setup='fmt="%%d"; arg=%s' % SHORT_INT, stmt='fmt % arg')
+    timeit(setup='fmt="%%x"; arg=%s' % SHORT_INT, stmt='fmt % arg')
 
-    # Basic format, long output
+
+def basic_format_long_output():
     for arg in LONG_ARGS:
         timeit(setup='fmt="{}"; arg=%s' % arg, stmt='fmt.format(arg)')
     for arg in LONG_ARGS:
         timeit(setup='fmt="%%s"; arg=%s' % arg, stmt='fmt % arg')
-    timeit(setup='fmt="{:d}"; arg=%s' % long_int, stmt='fmt.format(arg)')
-    timeit(setup='fmt="{:x}"; arg=%s' % long_int, stmt='fmt.format(arg)')
-    timeit(setup='fmt="%%d"; arg=%s' % long_int, stmt='fmt % arg')
-    timeit(setup='fmt="%%x"; arg=%s' % long_int, stmt='fmt % arg')
+    timeit(setup='fmt="{:d}"; arg=%s' % LONG_INT, stmt='fmt.format(arg)')
+    timeit(setup='fmt="{:x}"; arg=%s' % LONG_INT, stmt='fmt.format(arg)')
+    timeit(setup='fmt="%%d"; arg=%s' % LONG_INT, stmt='fmt % arg')
+    timeit(setup='fmt="%%x"; arg=%s' % LONG_INT, stmt='fmt % arg')
 
+
+def format_ascii_prefix_short_output():
     # One argument with ASCII prefix, short output
     for arg in SHORT_ARGS:
         timeit(setup='fmt="x={}"; arg=' + arg, stmt='fmt.format(arg)')
     for arg in SHORT_ARGS:
         timeit(setup='fmt="x=%s"; arg=' + arg, stmt='fmt % arg')
 
+
+def format_ascii_suffix_short_output():
     # One argument with ASCII suffix, short output
     for arg in SHORT_ARGS:
         timeit(setup='fmt="{}:"; arg=' + arg, stmt='fmt.format(arg)')
     for arg in SHORT_ARGS:
         timeit(setup='fmt="%s:"; arg=' + arg, stmt='fmt % arg')
 
+
+def format_bmp_prefix_suffix_short_output():
     if use_unicode:
         # One argument with BMP prefix and suffix, short output
         for arg in SHORT_ARGS:
@@ -114,6 +117,8 @@ def run_benchmark(bench):
         for arg in SHORT_ARGS:
             timeit(setup='fmt="\\u20ac[%s]"; arg=' + arg, stmt='fmt % arg')
 
+
+def format_huge_output_with_prefix_suffix():
     # Huge output with prefix and suffix
     for arg in HUGE_ARGS:
         timeit(setup='fmt="{}"; arg=' + arg, stmt='fmt.format(arg)')
@@ -121,50 +126,56 @@ def run_benchmark(bench):
         timeit(setup='fmt="x=[{}]"; arg=' + arg, stmt='fmt.format(arg)')
         timeit(setup='fmt="x=[%s]"; arg=' + arg, stmt='fmt % arg')
 
+
+def format_many_short_args():
     # Many short arguments
     for arg in SHORT_ARGS:
         timeit(setup='fmt="{0}"*1024', stmt='fmt.format(%s)' % arg)
-    timeit(setup='fmt="{0}{1}"*1024', stmt='fmt.format(%s, %s)' % (short_ascii, short_int))
+    timeit(setup='fmt="{0}{1}"*1024', stmt='fmt.format(%s, %s)' % (SHORT_ASCII, SHORT_INT))
     if use_unicode:
-        timeit(setup='fmt="{0}{1}{2}"*1024', stmt='fmt.format(%s, %s, %s)' % (short_ascii, short_bmp, short_int))
-    timeit(setup='fmt="{0}-"*1024', stmt='fmt.format(%s)' % short_ascii)
-    timeit(setup='fmt="{0}-"*1024', stmt='fmt.format(%s)' % short_int)
-    timeit(setup='fmt="{0}-{1}="*1024', stmt='fmt.format(%s, %s)' % (short_ascii, short_int))
+        timeit(setup='fmt="{0}{1}{2}"*1024', stmt='fmt.format(%s, %s, %s)' % (SHORT_ASCII, SHORT_BMP, SHORT_INT))
+    timeit(setup='fmt="{0}-"*1024', stmt='fmt.format(%s)' % SHORT_ASCII)
+    timeit(setup='fmt="{0}-"*1024', stmt='fmt.format(%s)' % SHORT_INT)
+    timeit(setup='fmt="{0}-{1}="*1024', stmt='fmt.format(%s, %s)' % (SHORT_ASCII, SHORT_INT))
     if use_unicode:
-        timeit(setup='fmt="{0}-{1}={2}#"*1024', stmt='fmt.format(%s, %s, %s)' % (short_ascii, short_bmp, short_int))
+        timeit(setup='fmt="{0}-{1}={2}#"*1024', stmt='fmt.format(%s, %s, %s)' % (SHORT_ASCII, SHORT_BMP, SHORT_INT))
 
+
+def format_many_long_args():
     # Many long arguments
     timeit(
-        setup='fmt="{0}"*1024; arg=' + long_ascii,
+        setup='fmt="{0}"*1024; arg=' + LONG_ASCII,
         stmt='fmt.format(arg)')
     if use_unicode:
         timeit(
-            setup='fmt="{0}"*1024; arg=' + long_bmp,
+            setup='fmt="{0}"*1024; arg=' + LONG_BMP,
             stmt='fmt.format(arg)')
     timeit(
-        setup='fmt="{0}"*1024; arg=' + long_int,
+        setup='fmt="{0}"*1024; arg=' + LONG_INT,
         stmt='fmt.format(arg)')
     timeit(
-        setup='fmt="{0}{1}"*1024; args=(%s, %s)' % (long_ascii, long_int),
+        setup='fmt="{0}{1}"*1024; args=(%s, %s)' % (LONG_ASCII, LONG_INT),
         stmt='fmt.format(*args)')
     if use_unicode:
         timeit(
-            setup='fmt="{0}{1}{2}"*1024; args=(%s, %s, %s)' % (long_ascii, long_bmp, long_int),
+            setup='fmt="{0}{1}{2}"*1024; args=(%s, %s, %s)' % (LONG_ASCII, LONG_BMP, LONG_INT),
             stmt='fmt.format(*args)')
     timeit(
-        setup='fmt="{0}-"*1024; arg=' + long_ascii,
+        setup='fmt="{0}-"*1024; arg=' + LONG_ASCII,
         stmt='fmt.format(arg)')
     timeit(
-        setup='fmt="{0}-"*1024; arg=' + long_int,
+        setup='fmt="{0}-"*1024; arg=' + LONG_INT,
         stmt='fmt.format(arg)')
     timeit(
-        setup='fmt="{0}-{1}="*1024; args=(%s, %s)' % (long_ascii, long_int),
+        setup='fmt="{0}-{1}="*1024; args=(%s, %s)' % (LONG_ASCII, LONG_INT),
         stmt='fmt.format(*args)')
     if use_unicode:
         timeit(
-            setup='fmt="{0}-{1}={2}#"*1024; args=(%s, %s, %s)' % (long_ascii, long_bmp, long_int),
+            setup='fmt="{0}-{1}={2}#"*1024; args=(%s, %s, %s)' % (LONG_ASCII, LONG_BMP, LONG_INT),
             stmt='fmt.format(*args)')
 
+
+def format_keywords():
     # Keywords
     timeit(
         setup='s="The {k1} is {k2} the {k3}."; args={"k1": "x", "k2": "y", "k3": "z"}',
@@ -173,8 +184,10 @@ def run_benchmark(bench):
         setup='s="The %(k1)s is %(k2)s the %(k3)s."; args={"k1":"x","k2":"y","k3":"z",}',
         stmt='s % args')
 
+
+def format_align_to_width_chars():
     if use_unicode:
-        FILL = ('', bmp_lit)
+        FILL = ('', BMP_LIT)
     else:
         FILL = ('',)
     args = SHORT_ARGS
@@ -187,14 +200,62 @@ def run_benchmark(bench):
         # timeit('fmt.format(arg)', 'fmt="%%-%ss"; arg=%s' % (width, arg))
         # timeit('fmt.format(arg)', 'fmt="%%%ss"; arg=%s' % (width, arg))
 
+
+def format_number_in_the_locale():
     # Format number in the locale
     for arg in INT_ARGS:
         timeit('fmt.format(arg)', 'fmt="{:,}"; arg=%s;' % arg)
 
+
+def str_int():
     # str(int)
     for arg in INT_ARGS:
         timeit(setup='number=' + arg, stmt='str(number)')
 
 
-runner = perf.Runner()
-run_benchmark(runner)
+BENCHMARKS = [
+    'basic_format_short_ascii_output',
+    'basic_format_long_output',
+    'format_ascii_prefix_short_output',
+    'format_ascii_suffix_short_output',
+    'format_bmp_prefix_suffix_short_output',
+    'format_huge_output_with_prefix_suffix',
+    'format_many_short_args',
+    'format_many_long_args',
+    'format_keywords',
+    'format_align_to_width_chars',
+    'format_number_in_the_locale',
+    'str_int',
+]
+
+
+def add_cmdline_args(cmd, args):
+    if args.benchmark:
+        cmd.append(args.benchmark)
+
+
+def main():
+    global timeit
+
+    runner = perf.Runner(add_cmdline_args=add_cmdline_args)
+    cmd = runner.argparser
+    choices = sorted(BENCHMARKS)
+    cmd.add_argument('benchmark', nargs='?', choices=choices)
+
+    def timeit(stmt, setup):
+        name = "%s; %s" % (setup, stmt)
+        runner.timeit(name, stmt, setup)
+
+    args = runner.parse_args()
+    name = args.benchmark
+    if not name:
+        for name in BENCHMARKS:
+            bench = globals()[name]
+            bench()
+    else:
+        bench = globals()[name]
+        bench()
+
+
+if __name__ == "__main__":
+    main()
