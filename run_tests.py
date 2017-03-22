@@ -47,7 +47,7 @@ def check_shebang(script):
 def run_script(script, output):
     # --append: write all results into a file to ensure that all test
     # names are unique
-    args = [sys.executable, script, "-p1", "-v", "--append", output]
+    args = [sys.executable, script, "--debug-single-value", "-v", "--append", output]
     print("+ " + ' '.join(args))
     proc = subprocess.Popen(args)
     with proc:
