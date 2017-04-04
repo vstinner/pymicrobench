@@ -24,6 +24,9 @@ bench.timeit("sorted(list(range(1000)), key=lambda x: x)",
              "sorted(s, key=f)",
              "f = lambda x: x; s = list(range(1000))")
 
+# Benchmark property_descr_get():
+# PyObject_GetAttr() -> property_descr_get() -> itemgetter_call()
+# -> PyObject_GetItem() -> tuplesubscript()
 bench.timeit("namedtuple.attr",
              "a.a",
              "from collections import namedtuple as n; a = n('n', 'a b c')(1, 2, 3)",
