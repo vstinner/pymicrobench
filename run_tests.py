@@ -58,6 +58,7 @@ def run_script(script, output):
 
 def run_tests():
     scripts = glob.glob("bench*.py")
+    scripts.append('pybench/pybench.py')
     with temporary_file() as tmpfile:
         for script in scripts:
             check_permission(script)
@@ -65,8 +66,6 @@ def run_tests():
 
         for script in scripts:
             run_script(script, tmpfile)
-
-        run_script('pybench/pybench.py', tmpfile)
 
 
 if __name__ == "__main__":
