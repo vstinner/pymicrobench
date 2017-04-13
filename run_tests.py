@@ -66,6 +66,8 @@ def run_tests():
         for script in scripts:
             run_script(script, tmpfile)
 
+        run_script('pybench/pybench.py', tmpfile)
+
 
 if __name__ == "__main__":
     run_tests()
