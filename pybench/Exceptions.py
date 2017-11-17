@@ -1,3 +1,6 @@
+# Ignore flake8 E722 warning in the whole file:
+# flake8: noqa
+
 import perf
 from six.moves import xrange
 
