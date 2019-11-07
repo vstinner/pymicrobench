@@ -148,8 +148,8 @@ class Benchmark:
             name = testclass.__name__
             if name == 'Test':
                 continue
-            if (limitnames is not None and
-                    limitnames.search(name) is None):
+            if (limitnames is not None
+               and limitnames.search(name) is None):
                 continue
             test = testclass()
             self.tests.append(test)
@@ -181,7 +181,7 @@ def add_cmdline_args(cmd, args):
 def main():
     metadata = {'pybench_version': __version__}
     runner = pyperf.Runner(metadata=metadata,
-                         add_cmdline_args=add_cmdline_args)
+                           add_cmdline_args=add_cmdline_args)
 
     cmd = runner.argparser
     cmd.add_argument("-b", "--benchmarks", metavar="REGEX",
