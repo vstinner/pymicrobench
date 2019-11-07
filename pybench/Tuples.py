@@ -1,7 +1,7 @@
 # Ignore flake8 E741 warning in the whole file:
 # flake8: noqa
 
-import perf
+import pyperf
 from six.moves import xrange
 
 from pybench import Test
@@ -18,7 +18,7 @@ class TupleSlicing(Test):
         r = range(25)
         t = tuple(range(100))
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -264,7 +264,7 @@ class TupleSlicing(Test):
                 m = t[-10:]    # noqa
                 m = t[:10]     # noqa
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class SmallTuples(Test):
@@ -275,7 +275,7 @@ class SmallTuples(Test):
 
     def test(self, loops):
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -359,4 +359,4 @@ class SmallTuples(Test):
             l = list(t)
             t = tuple(l)
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0

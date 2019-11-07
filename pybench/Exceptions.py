@@ -1,7 +1,7 @@
 # Ignore flake8 E722 warning in the whole file:
 # flake8: noqa
 
-import perf
+import pyperf
 from six.moves import xrange
 
 from pybench import Test
@@ -17,7 +17,7 @@ class TryRaiseExcept(Test):
 
         error = ValueError
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
             try:
@@ -53,7 +53,7 @@ class TryRaiseExcept(Test):
             except:
                 pass
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class TryExcept(Test):
@@ -66,7 +66,7 @@ class TryExcept(Test):
     def test(self, loops):
 
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
             try:
@@ -684,4 +684,4 @@ class TryExcept(Test):
             except:
                 pass
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0

@@ -1,4 +1,4 @@
-import perf
+import pyperf
 from six.moves import xrange
 
 from pybench import Test
@@ -12,7 +12,7 @@ class DictCreation(Test):
 
     def test(self, loops):
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -76,7 +76,7 @@ class DictCreation(Test):
             d4 = {4: 5, 6: 7, 8: 9}     # noqa
             d5 = {6: 7, 8: 9, 10: 11}   # noqa
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class DictWithStringKeys(Test):
@@ -88,7 +88,7 @@ class DictWithStringKeys(Test):
     def test(self, loops):
         d = {}
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -162,7 +162,7 @@ class DictWithStringKeys(Test):
             d['mno']
             d['pqr']
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class DictWithFloatKeys(Test):
@@ -175,7 +175,7 @@ class DictWithFloatKeys(Test):
 
         d = {}
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -249,7 +249,7 @@ class DictWithFloatKeys(Test):
             d[5.678]
             d[6.789]
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class DictWithIntegerKeys(Test):
@@ -262,7 +262,7 @@ class DictWithIntegerKeys(Test):
 
         d = {}
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -336,7 +336,7 @@ class DictWithIntegerKeys(Test):
             d[5]
             d[6]
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class SimpleDictManipulation(Test):
@@ -353,7 +353,7 @@ class SimpleDictManipulation(Test):
             return key in d
 
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -497,4 +497,4 @@ class SimpleDictManipulation(Test):
             del d[4]
             del d[5]
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0

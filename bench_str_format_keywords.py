@@ -8,7 +8,7 @@ Issues:
 * http://bugs.python.org/issue14687 str % args
 """
 
-import perf
+import pyperf
 import sys
 
 
@@ -77,5 +77,5 @@ def run_benchmark(bench):
             stmt='fmt % args')
 
 
-runner = perf.Runner()
+runner = pyperf.Runner()
 run_benchmark(runner)

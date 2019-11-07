@@ -8,7 +8,7 @@ import logging
 
 import six
 from six.moves import xrange
-import perf
+import pyperf
 
 FORMAT = 'important: %s'
 MESSAGE = 'some important information to be logged'
@@ -18,7 +18,7 @@ def bench_logging_silent(loops, logger, stream):
     # micro-optimization: use fast local variables
     m = MESSAGE
     range_it = xrange(loops)
-    t0 = perf.perf_counter()
+    t0 = pyperf.perf_counter()
 
     for _ in range_it:
         # repeat 10 times
@@ -33,7 +33,7 @@ def bench_logging_silent(loops, logger, stream):
         logger.debug(m)
         logger.debug(m)
 
-    dt = perf.perf_counter() - t0
+    dt = pyperf.perf_counter() - t0
 
     if stream.getvalue():
         raise ValueError("stream is expected to be empty")
@@ -42,7 +42,7 @@ def bench_logging_silent(loops, logger, stream):
 
 
 if __name__ == "__main__":
-    runner = perf.Runner()
+    runner = pyperf.Runner()
     runner.metadata['description'] = ("Measure the overhead of "
                                       "a logging call doing nothing")
 

@@ -1,4 +1,4 @@
-import perf
+import pyperf
 from six.moves import xrange
 
 from pybench import Test
@@ -15,7 +15,7 @@ class SecondImport(Test):
 
     def test(self, loops):
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
             import os   # noqa
@@ -48,7 +48,7 @@ class SecondImport(Test):
             import os   # noqa
             import os   # noqa
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class SecondPackageImport(Test):
@@ -58,7 +58,7 @@ class SecondPackageImport(Test):
 
     def test(self, loops):
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
             import package   # noqa
@@ -91,7 +91,7 @@ class SecondPackageImport(Test):
             import package   # noqa
             import package   # noqa
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class SecondSubmoduleImport(Test):
@@ -101,7 +101,7 @@ class SecondSubmoduleImport(Test):
 
     def test(self, loops):
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
             import package.submodule   # noqa
@@ -134,4 +134,4 @@ class SecondSubmoduleImport(Test):
             import package.submodule   # noqa
             import package.submodule   # noqa
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0

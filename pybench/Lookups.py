@@ -1,7 +1,7 @@
 # Ignore flake8 E741 warning in the whole file:
 # flake8: noqa
 
-import perf
+import pyperf
 from six.moves import xrange
 
 from pybench import Test
@@ -19,7 +19,7 @@ class SpecialClassAttribute(Test):
             pass
 
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -183,7 +183,7 @@ class SpecialClassAttribute(Test):
             x = c.__b    # noqa
             x = c.__c    # noqa
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class NormalClassAttribute(Test):
@@ -198,7 +198,7 @@ class NormalClassAttribute(Test):
             pass
 
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -362,7 +362,7 @@ class NormalClassAttribute(Test):
             x = c.b   # noqa
             x = c.c   # noqa
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class SpecialInstanceAttribute(Test):
@@ -378,7 +378,7 @@ class SpecialInstanceAttribute(Test):
         o = c()
 
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -542,7 +542,7 @@ class SpecialInstanceAttribute(Test):
             x = o.__b__   # noqa
             x = o.__c__   # noqa
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class NormalInstanceAttribute(Test):
@@ -558,7 +558,7 @@ class NormalInstanceAttribute(Test):
         o = c()
 
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -722,7 +722,7 @@ class NormalInstanceAttribute(Test):
             x = o.b   # noqa
             x = o.c   # noqa
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class BuiltinMethodLookup(Test):
@@ -737,7 +737,7 @@ class BuiltinMethodLookup(Test):
         d = {}
 
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -921,4 +921,4 @@ class BuiltinMethodLookup(Test):
             d.get
             d.get
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0

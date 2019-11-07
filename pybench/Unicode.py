@@ -1,4 +1,4 @@
-import perf
+import pyperf
 import six
 from six import unichr
 from six.moves import xrange
@@ -26,7 +26,7 @@ class ConcatUnicode(Test):
         s = unicode(u''.join(map(str, range(100))))
         t = unicode(u''.join(map(str, range(1, 101))))
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
             t + s
@@ -89,7 +89,7 @@ class ConcatUnicode(Test):
             t + s
             t + s
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class CompareUnicode(Test):
@@ -104,7 +104,7 @@ class CompareUnicode(Test):
         s = unicode(u''.join(map(str, range(10))))
         t = unicode(u''.join(map(str, range(10))) + "abc")
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
             t < s
@@ -167,7 +167,7 @@ class CompareUnicode(Test):
             t > s
             t < s
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class CreateUnicodeWithConcat(Test):
@@ -178,7 +178,7 @@ class CreateUnicodeWithConcat(Test):
 
     def test(self, loops):
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
             s = u'om'
@@ -241,7 +241,7 @@ class CreateUnicodeWithConcat(Test):
             s = s + u'xdx'
             s = s + u'xex'
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class UnicodeSlicing(Test):
@@ -253,7 +253,7 @@ class UnicodeSlicing(Test):
     def test(self, loops):
         s = unicode(u''.join(map(str, range(100))))
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -297,7 +297,7 @@ class UnicodeSlicing(Test):
             s[2:]
             s[11:-11]
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 # String methods
@@ -314,7 +314,7 @@ class UnicodeMappings(Test):
         u = u''.join(map(unichr, range(500)))
         v = u''.join(map(unichr, range(1000)))
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -366,7 +366,7 @@ class UnicodeMappings(Test):
 
             v.title()
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class UnicodePredicates(Test):
@@ -380,7 +380,7 @@ class UnicodePredicates(Test):
         data = (u'abc', u'123', u'   ', u'\u1234\u2345\u3456', u'\uFFFF' * 10)
         len_data = len(data)
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for i in range_it:
             s = data[i % len_data]
@@ -435,7 +435,7 @@ class UnicodePredicates(Test):
             s.istitle()
             s.isupper()
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 try:
@@ -462,7 +462,7 @@ else:
             mirrored = unicodedata.mirrored
             combining = unicodedata.combining
             range_it = xrange(loops)
-            t0 = perf.perf_counter()
+            t0 = pyperf.perf_counter()
 
             for i in range_it:
 
@@ -513,4 +513,4 @@ else:
                 mirrored(c)
                 combining(c)
 
-            return perf.perf_counter() - t0
+            return pyperf.perf_counter() - t0

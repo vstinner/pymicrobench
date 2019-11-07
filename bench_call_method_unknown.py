@@ -9,7 +9,7 @@ rotated for each method call.  On the first run of a method, all the call sites
 will use one type, and on the next, they will all be different.
 """
 
-import perf
+import pyperf
 from six.moves import xrange
 
 
@@ -312,7 +312,7 @@ def test_calls(loops):
     b = Bar()
     c = Baz()
     range_it = xrange(loops)
-    t0 = perf.perf_counter()
+    t0 = pyperf.perf_counter()
 
     for _ in range_it:
         # 18 calls
@@ -335,11 +335,11 @@ def test_calls(loops):
         b.foo(c, a)
         c.foo(a, b)
 
-    return perf.perf_counter() - t0
+    return pyperf.perf_counter() - t0
 
 
 if __name__ == "__main__":
-    runner = perf.Runner()
+    runner = pyperf.Runner()
     runner.metadata['description'] = ("Test the performance of unpredictable "
                                       "Python-to-Python method calls")
     runner.bench_time_func('call_method_unknown', test_calls, inner_loops=18)

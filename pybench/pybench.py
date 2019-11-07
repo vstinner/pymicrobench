@@ -11,7 +11,7 @@ from __future__ import print_function
 import re
 import sys
 
-import perf
+import pyperf
 
 
 # pybench Copyright
@@ -180,7 +180,7 @@ def add_cmdline_args(cmd, args):
 
 def main():
     metadata = {'pybench_version': __version__}
-    runner = perf.Runner(metadata=metadata,
+    runner = pyperf.Runner(metadata=metadata,
                          add_cmdline_args=add_cmdline_args)
 
     cmd = runner.argparser

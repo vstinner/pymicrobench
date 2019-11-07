@@ -1,6 +1,6 @@
 from __future__ import with_statement
 
-import perf
+import pyperf
 from six.moves import xrange
 
 from pybench import Test
@@ -23,7 +23,7 @@ class WithFinally(Test):
     def test(self, loops):
         cm = self.ContextManager()
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
             with cm:
@@ -67,7 +67,7 @@ class WithFinally(Test):
             with cm:
                 pass
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class TryFinally(Test):
@@ -89,7 +89,7 @@ class TryFinally(Test):
     def test(self, loops):
         cm = self.ContextManager()
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
             cm.__enter__()
@@ -212,7 +212,7 @@ class TryFinally(Test):
             finally:
                 cm.__exit__()
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class WithRaiseExcept(Test):
@@ -234,7 +234,7 @@ class WithRaiseExcept(Test):
         error = ValueError
         be = self.BlockExceptions()
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
             with be:
@@ -254,4 +254,4 @@ class WithRaiseExcept(Test):
             with be:
                 raise error("something")
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0

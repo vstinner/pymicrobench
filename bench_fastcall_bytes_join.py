@@ -7,9 +7,9 @@ http://bugs.python.org/issue28004
 Created at 2016-09-07 by Victor STINNER.
 """
 
-import perf
+import pyperf
 
-runner = perf.Runner()
+runner = pyperf.Runner()
 
 
 runner.timeit('b"".join((b"hello", b"world"))',

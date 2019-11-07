@@ -1,4 +1,4 @@
-import perf
+import pyperf
 from six.moves import xrange
 
 from pybench import Test
@@ -13,7 +13,7 @@ class IfThenElse(Test):
     def test(self, loops):
         a, b, c = 1, 2, 3
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -467,7 +467,7 @@ class IfThenElse(Test):
             else:
                 a = 1
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class NestedForLoops(Test):
@@ -481,7 +481,7 @@ class NestedForLoops(Test):
         l2 = range(10)
         l3 = range(5)
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
             for i in l1:
@@ -489,7 +489,7 @@ class NestedForLoops(Test):
                     for k in l3:
                         pass
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class ForLoops(Test):
@@ -503,7 +503,7 @@ class ForLoops(Test):
 
         l1 = range(100)
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
             for i in l1:
@@ -561,4 +561,4 @@ class ForLoops(Test):
             for i in l1:
                 pass
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0

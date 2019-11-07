@@ -1,4 +1,4 @@
-import perf
+import pyperf
 import six
 from six.moves import xrange
 
@@ -16,7 +16,7 @@ class CompareIntegers(Test):
 
     def test(self, loops):
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -200,7 +200,7 @@ class CompareIntegers(Test):
             2 > 3
             2 < 3
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class CompareFloats(Test):
@@ -211,7 +211,7 @@ class CompareFloats(Test):
 
     def test(self, loops):
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -395,7 +395,7 @@ class CompareFloats(Test):
             2.1 > 3.31
             2.1 < 3.31
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class CompareFloatsIntegers(Test):
@@ -406,7 +406,7 @@ class CompareFloatsIntegers(Test):
 
     def test(self, loops):
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -590,7 +590,7 @@ class CompareFloatsIntegers(Test):
             2.1 > 4
             2.1 < 4
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class CompareLongs(Test):
@@ -603,7 +603,7 @@ class CompareLongs(Test):
         a = long(1234567890)
         b = long(3456789012345)
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -787,4 +787,4 @@ class CompareLongs(Test):
             a > b
             a < b
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0

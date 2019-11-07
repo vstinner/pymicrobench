@@ -1,4 +1,4 @@
-import perf
+import pyperf
 import six
 from six.moves import xrange
 
@@ -18,7 +18,7 @@ class SimpleIntegerArithmetic(Test):
 
     def test(self, loops):
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -162,7 +162,7 @@ class SimpleIntegerArithmetic(Test):
             c = b / a
             c = c / b
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class SimpleFloatArithmetic(Test):
@@ -174,7 +174,7 @@ class SimpleFloatArithmetic(Test):
 
     def test(self, loops):
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -318,7 +318,7 @@ class SimpleFloatArithmetic(Test):
             c = b / a
             c = c / b
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class SimpleIntFloatArithmetic(Test):
@@ -329,7 +329,7 @@ class SimpleIntFloatArithmetic(Test):
 
     def test(self, loops):
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -473,7 +473,7 @@ class SimpleIntFloatArithmetic(Test):
             c = b / a
             c = c / b
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class SimpleLongArithmetic(Test):
@@ -487,7 +487,7 @@ class SimpleLongArithmetic(Test):
         B = long(100001)
         C = long(30005)
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -631,7 +631,7 @@ class SimpleLongArithmetic(Test):
             c = b / a
             c = c / b
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class SimpleComplexArithmetic(Test):
@@ -642,7 +642,7 @@ class SimpleComplexArithmetic(Test):
 
     def test(self, loops):
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -786,4 +786,4 @@ class SimpleComplexArithmetic(Test):
             c = b / a
             c = c / b
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0

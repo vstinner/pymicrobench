@@ -6,9 +6,9 @@ http://bugs.python.org/issue29735
 
 Created at 2017-03-14 by Victor Stinner.
 """
-import perf
+import pyperf
 
-runner = perf.Runner()
+runner = pyperf.Runner()
 DUP = 1024
 
 # Use small buffer, total: 2 positional arguments.

@@ -1,4 +1,4 @@
-import perf
+import pyperf
 from six.moves import xrange
 
 from pybench import Test
@@ -32,7 +32,7 @@ class CreateInstances(Test):
                 self.f = c
 
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for i in range_it:
             o = c()           # noqa
@@ -50,4 +50,4 @@ class CreateInstances(Test):
             q2 = e(i, i, 3)   # noqa
             q3 = e(i, i)      # noqa
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0

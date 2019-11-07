@@ -8,7 +8,7 @@ http://bugs.python.org/issue29507
 Created at 2016-12-09 by Victor Stinner.
 """
 
-import perf
+import pyperf
 
 
 class Obj:
@@ -25,7 +25,7 @@ if int(obj) != 5:
 if obj[0] != 6:
     raise Exception("bug")
 
-runner = perf.Runner()
+runner = pyperf.Runner()
 
 runner.timeit('Python __int__: int(obj)',
               'int(obj)',

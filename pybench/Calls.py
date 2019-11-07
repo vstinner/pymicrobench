@@ -1,4 +1,4 @@
-import perf
+import pyperf
 from six.moves import xrange
 from pybench import Test
 
@@ -27,7 +27,7 @@ class PythonFunctionCalls(Test):
             return d, e, f
 
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         # do calls
         for i in range_it:
@@ -92,7 +92,7 @@ class PythonFunctionCalls(Test):
             h(i, i, 3, i, i)
             h(i, i, i, 2, i, 3)
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 ###
@@ -113,7 +113,7 @@ class ComplexPythonFunctionCalls(Test):
         kwargs = dict(c=3, d=4, e=5)
 
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         # do calls
         for i in range_it:
@@ -142,7 +142,7 @@ class ComplexPythonFunctionCalls(Test):
             f(1, b=i, **kwargs)
             f(*args, **kwargs)
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 ###
@@ -162,7 +162,7 @@ class BuiltinFunctionCalls(Test):
         f3 = max
 
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         # do calls
         for i in range_it:
@@ -256,7 +256,7 @@ class BuiltinFunctionCalls(Test):
             f3(1, 3, 2)
             f3(1, 3, 2)
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 ###
 
@@ -292,7 +292,7 @@ class PythonMethodCalls(Test):
 
         o = c()
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for i in range_it:
 
@@ -376,7 +376,7 @@ class PythonMethodCalls(Test):
             o.k(i, 2, 3)
             o.k(i, i, c=4)
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 ###
@@ -398,7 +398,7 @@ class Recursion(Test):
             return 1
 
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
             f(10)
@@ -407,4 +407,4 @@ class Recursion(Test):
             f(10)
             f(10)
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0

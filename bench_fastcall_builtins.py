@@ -8,9 +8,9 @@ http://bugs.python.org/issue26814
 Created at 2016-04-22 by Victor Stinner.
 """
 
-import perf
+import pyperf
 
-bench = perf.Runner()
+bench = pyperf.Runner()
 
 bench.timeit("filter(lambda x: x, list(range(1000)))",
              "list(filter(f, s))",

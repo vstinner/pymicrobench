@@ -1,4 +1,4 @@
-import perf
+import pyperf
 from six.moves import intern, xrange
 
 from pybench import Test
@@ -17,7 +17,7 @@ class ConcatStrings(Test):
         t = ''.join(map(str, range(1, 101)))
 
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
             t + s
@@ -80,7 +80,7 @@ class ConcatStrings(Test):
             t + s
             t + s
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class CompareStrings(Test):
@@ -96,7 +96,7 @@ class CompareStrings(Test):
         t = ''.join(map(str, range(10))) + "abc"
 
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
             t < s
@@ -159,7 +159,7 @@ class CompareStrings(Test):
             t > s
             t < s
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class CompareInternedStrings(Test):
@@ -175,7 +175,7 @@ class CompareInternedStrings(Test):
         t = s
 
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
             t == s
@@ -238,7 +238,7 @@ class CompareInternedStrings(Test):
             t > s
             t < s
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class CreateStringsWithConcat(Test):
@@ -249,7 +249,7 @@ class CreateStringsWithConcat(Test):
     def test(self, loops):
 
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
             s = 'om'
@@ -312,7 +312,7 @@ class CreateStringsWithConcat(Test):
             s = s + 'xdx'
             s = s + 'xex'
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class StringSlicing(Test):
@@ -326,7 +326,7 @@ class StringSlicing(Test):
         s = ''.join(map(str, range(100)))
 
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -370,7 +370,7 @@ class StringSlicing(Test):
             s[2:]
             s[11:-11]
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 # String methods
@@ -390,7 +390,7 @@ if hasattr('', 'lower'):
             v = ''.join(map(chr, range(256)))
 
             range_it = xrange(loops)
-            t0 = perf.perf_counter()
+            t0 = pyperf.perf_counter()
 
             for _ in range_it:
 
@@ -442,7 +442,7 @@ if hasattr('', 'lower'):
 
                 v.title()
 
-            return perf.perf_counter() - t0
+            return pyperf.perf_counter() - t0
 
     class StringPredicates(Test):
 
@@ -456,7 +456,7 @@ if hasattr('', 'lower'):
             len_data = len(data)
 
             range_it = xrange(loops)
-            t0 = perf.perf_counter()
+            t0 = pyperf.perf_counter()
 
             for i in range_it:
                 s = data[i % len_data]
@@ -541,4 +541,4 @@ if hasattr('', 'lower'):
                 s.istitle()
                 s.isupper()
 
-            return perf.perf_counter() - t0
+            return pyperf.perf_counter() - t0

@@ -4,14 +4,14 @@ Microbenchmark on bytes % args for Python 3:
 https://bugs.python.org/issue25349
 """
 
-import perf
+import pyperf
 
 
 COUNT = (1, 5, 10, 25, 100, 200, 500)
 
 
 def main():
-    runner = perf.Runner()
+    runner = pyperf.Runner()
 
     group = None
 

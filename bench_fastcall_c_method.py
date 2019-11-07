@@ -7,9 +7,9 @@ http://bugs.python.org/issue29263
 Created at 2017-01-14 by INADA Naoki.
 """
 
-import perf
+import pyperf
 
-runner = perf.Runner()
+runner = pyperf.Runner()
 runner.timeit('b"".decode()',
               "empty_bytes.decode()",
               setup="empty_bytes = b''",

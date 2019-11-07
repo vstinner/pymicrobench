@@ -9,7 +9,7 @@ def main():
         'url': 'https://github.com/vstinner/pymicrobench',
         'author': 'Victor Stinner',
         'author_email': 'victor.stinner@gmail.com',
-        'install_requires': ["perf"],
+        'install_requires': ["pyperf"],
     }
     setup(**options)
 

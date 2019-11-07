@@ -7,9 +7,9 @@ http://bugs.python.org/issue29300
 Created at 2017-02-02 by Victor STINNER.
 """
 
-import perf
+import pyperf
 
-runner = perf.Runner()
+runner = pyperf.Runner()
 
 runner.timeit('int.to_bytes(1, 4, "little")',
               'to_bytes(1, 4, "little")',

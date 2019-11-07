@@ -31,7 +31,7 @@ Benchmarks written for the "faster format" optimizations:
    * "x=%s".format("A" * 4096)
 """
 
-import perf
+import pyperf
 import sys
 
 
@@ -237,7 +237,7 @@ def add_cmdline_args(cmd, args):
 def main():
     global timeit
 
-    runner = perf.Runner(add_cmdline_args=add_cmdline_args)
+    runner = pyperf.Runner(add_cmdline_args=add_cmdline_args)
     cmd = runner.argparser
     choices = sorted(BENCHMARKS)
     cmd.add_argument('benchmark', nargs='?', choices=choices)

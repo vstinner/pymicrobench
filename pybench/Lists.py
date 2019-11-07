@@ -1,7 +1,7 @@
 # Ignore flake8 E741 warning in the whole file:
 # flake8: noqa
 
-import perf
+import pyperf
 from six.moves import xrange
 
 from pybench import Test
@@ -18,7 +18,7 @@ class SimpleListManipulation(Test):
         l = []
         append = l.append
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -131,7 +131,7 @@ class SimpleListManipulation(Test):
                 # cut down the size
                 del l[:]
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class ListSlicing(Test):
@@ -144,7 +144,7 @@ class ListSlicing(Test):
         n = list(range(100))
         r = list(range(25))
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -160,7 +160,7 @@ class ListSlicing(Test):
                 m = l[1:]      # noqa
                 l[-1:] = n     # noqa
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class SmallLists(Test):
@@ -172,7 +172,7 @@ class SmallLists(Test):
     def test(self, loops):
 
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
 
@@ -291,7 +291,7 @@ class SmallLists(Test):
 
             l[-1:] = [4, 5, 6]
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class SimpleListComprehensions(Test):
@@ -305,7 +305,7 @@ class SimpleListComprehensions(Test):
         n = list(range(10)) * 10
 
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
             l = [x for x in n]
@@ -316,7 +316,7 @@ class SimpleListComprehensions(Test):
             l = [x for x in n if x]
             l = [x for x in n if not x]    # noqa
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0
 
 
 class NestedListComprehensions(Test):
@@ -330,7 +330,7 @@ class NestedListComprehensions(Test):
         n = list(range(10))
 
         range_it = xrange(loops)
-        t0 = perf.perf_counter()
+        t0 = pyperf.perf_counter()
 
         for _ in range_it:
             l = [x for x in n for y in m]
@@ -342,4 +342,4 @@ class NestedListComprehensions(Test):
             l = [x for x in n for y in m if not y]
             l = [y for x in n for y in m if not x]   # noqa
 
-        return perf.perf_counter() - t0
+        return pyperf.perf_counter() - t0

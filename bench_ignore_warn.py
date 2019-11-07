@@ -4,7 +4,7 @@
 https://bugs.python.org/issue27535
 """
 
-import perf
+import pyperf
 from six.moves import xrange
 import warnings
 
@@ -14,15 +14,15 @@ def emit_warning(loops):
     category = Warning
     range_it = xrange(loops)
 
-    start_time = perf.perf_counter()
+    start_time = pyperf.perf_counter()
     for _ in range_it:
         warn_func('test', category)
-    dt = perf.perf_counter() - start_time
+    dt = pyperf.perf_counter() - start_time
     return dt
 
 
 if __name__ == "__main__":
-    runner = perf.Runner()
+    runner = pyperf.Runner()
     runner.metadata['description'] = ("Measure the performance of emitting "
                                       "a warning which is ignored")
 

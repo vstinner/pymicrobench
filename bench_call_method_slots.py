@@ -7,7 +7,7 @@ When an object has no __dict__ attribute, the JIT can optimize away most of the
 attribute lookup.  This benchmark measures how well it can do that.
 """
 
-import perf
+import pyperf
 from six.moves import xrange
 
 
@@ -116,7 +116,7 @@ def test_calls(loops):
     if hasattr(f, '__dict__'):
         raise Exception("f has a __dict__ attribute!")
     range_it = xrange(loops)
-    t0 = perf.perf_counter()
+    t0 = pyperf.perf_counter()
 
     for _ in range_it:
         # 20 calls
@@ -141,11 +141,11 @@ def test_calls(loops):
         f.foo(1, 2, 3, 4)
         f.foo(1, 2, 3, 4)
 
-    return perf.perf_counter() - t0
+    return pyperf.perf_counter() - t0
 
 
 if __name__ == "__main__":
-    runner = perf.Runner()
+    runner = pyperf.Runner()
     runner.metadata['description'] = ("Test the performance of method calls "
                                       "on objects that use  __slots__")
     runner.bench_time_func('call_method_slots', test_calls, inner_loops=20)

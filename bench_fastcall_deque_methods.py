@@ -8,9 +8,9 @@ Created at 2017-02-05 by Victor STINNER.
 """
 
 import collections
-import perf
+import pyperf
 
-runner = perf.Runner()
+runner = pyperf.Runner()
 
 runner.timeit('collections.deque.rotate()',
               'd.rotate()',
