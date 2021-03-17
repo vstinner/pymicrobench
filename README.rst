@@ -2,9 +2,9 @@
 pymicrobench
 ************
 
-.. image:: https://travis-ci.com/vstinner/pymicrobench.svg?branch=master
-   :alt: Build status of pymicrobench on Travis CI
-   :target: https://travis-ci.com/github/vstinner/pymicrobench
+.. image:: https://github.com/vstinner/pymicrobench/actions/workflows/build.yml/badge.svg
+   :alt: Build status of pymicrobench on GitHub Actions
+   :target: https://github.com/vstinner/pymicrobench/actions
 
 My collection of Python microbenchmarks written for CPython.
 
