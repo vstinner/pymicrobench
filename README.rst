@@ -2,10 +2,6 @@
 pymicrobench
 ************
 
-.. image:: https://github.com/vstinner/pymicrobench/actions/workflows/build.yml/badge.svg
-   :alt: Build status of pymicrobench on GitHub Actions
-   :target: https://github.com/vstinner/pymicrobench/actions
-
 My collection of Python microbenchmarks written for CPython.
 
 Benchmarks were written to make sure that a change makes CPython faster.
@@ -21,3 +17,5 @@ benchmarks. Install perf using::
 
 Read pyperf documentation to see how to run stable benchmarks (ex: tune your
 system for benchmarking).
+
+This project is now archived and no longer maintained.
